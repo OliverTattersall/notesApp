@@ -13,26 +13,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RolesAllowed("ROLE_ADMIN")
+
 @RestController
 @RequestMapping("/api/admin")
+@Secured("ROLE_ADMIN") // applies for all methods, can also apply at service level
 public class AdminController {
 
     @Autowired
     UserService userService;
 
 
+//    @Secured("ROLE_ADMIN")
     @GetMapping("/getusers")
     public ResponseEntity<List<User>> getAllUsers(){
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
+//    @Secured("ROLE_ADMIN")
     @PutMapping("/update-role")
     public ResponseEntity<String> updateUserRole(@RequestParam Long userId, @RequestParam String roleName){
         userService.updateUserRole(userId, roleName);
         return ResponseEntity.ok("User role updated");
     }
 
+//    @Secured("ROLE_ADMIN")
     @GetMapping("/user/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable Long id){
         return new ResponseEntity<UserDTO>(userService.getUserById(id), HttpStatus.OK);
