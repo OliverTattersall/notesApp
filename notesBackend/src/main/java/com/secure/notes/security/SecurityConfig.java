@@ -70,7 +70,7 @@ public class SecurityConfig {
             )
             .authorizeHttpRequests(
                 (requests) -> requests
-                        .requestMatchers("/api/auth/**").permitAll() // opens auth
+                        .requestMatchers("/api/auth/public/**").permitAll() // opens auth
                         .requestMatchers("/api/csrf-token").permitAll() // to get csrf token
 //                        .requestMatchers("/api/admin/**").hasRole("ADMIN") // can use this instead of method level. note hasRole appends ROLE_ at start
                         .anyRequest().authenticated()
